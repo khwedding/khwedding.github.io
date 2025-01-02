@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap"
         rel="stylesheet">
     <style>
         :root {
@@ -24,8 +24,8 @@
             --bulma-link-l: var(--bulma-primary-l);
 
             /* Set font family */
-            --bulma-family-primary: 'Noto Serif KR', serif;
-            --bulma-family-secondary: 'Noto Serif KR', serif;
+            --bulma-family-primary: 'Gowun Batang', serif;
+            --bulma-family-secondary: 'Gowun Batang', serif;
         }
 
         /* Dark mode overrides */
@@ -38,13 +38,22 @@
             --bulma-scheme-invert-ter: hsl(0, 0%, 94%);
 
             --bulma-background: var(--bulma-scheme-main);
-            --bulma-text: hsl(0, 0%, 86%);
-            --bulma-text-strong: hsl(0, 0%, 96%);
-            --bulma-text-light: hsl(0, 0%, 60%);
+            --bulma-text: hsl(0, 0%, 96%);
+            --bulma-text-strong: hsl(0, 0%, 100%);
+            --bulma-text-light: hsl(0, 0%, 85%);
 
             /* Adjust box and modal colors for dark mode */
             --bulma-box-background: var(--bulma-scheme-main-bis);
             --bulma-box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.3);
+        }
+
+        /* Dark mode text overrides */
+        [data-theme="dark"] .has-text-grey-dark {
+            color: hsl(0, 0%, 90%) !important;
+        }
+
+        [data-theme="dark"] .has-text-grey {
+            color: hsl(0, 0%, 85%) !important;
         }
 
         /* Names styling */
@@ -79,21 +88,6 @@
             height: 1px;
             margin: 2rem auto;
             max-width: 150px;
-        }
-
-        /* Theme toggle */
-        .theme-toggle {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            z-index: 100;
-        }
-
-        .theme-toggle .button {
-            border-radius: 50%;
-            width: 2.5rem;
-            height: 2.5rem;
-            padding: 0;
         }
 
         /* Theme icons visibility */
@@ -153,14 +147,24 @@
 </head>
 
 <body class="has-background-scheme-main">
-    <div class="theme-toggle">
-        <button class="button is-primary is-outlined" onclick="toggleTheme()">
-            <span class="icon">
-                <i class="fas fa-moon dark-icon"></i>
-                <i class="fas fa-sun light-icon"></i>
-            </span>
-        </button>
-    </div>
+    <nav class="navbar">
+        <div class="navbar-brand is-flex is-justify-content-space-between is-flex-grow-1">
+            <span class="navbar-item">조현정 & 박근홍</span>
+            <button class="button is-small is-primary is-outlined m-2" onclick="toggleTheme()">
+                <span class="icon">
+                    <i class="fas fa-moon dark-icon"></i>
+                    <i class="fas fa-sun light-icon"></i>
+                </span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Photo section -->
+    <section class="section is-paddingless">
+        <figure class="image">
+            <img src="images/photo.jpg" alt="Wedding photo" style="width: 100%; height: auto;">
+        </figure>
+    </section>
 
     <!-- Names section - no box needed, just clean typography -->
     <section class="section">
