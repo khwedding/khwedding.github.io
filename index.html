@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>조현정과 박근홍의 결혼식에 초대합니다</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* Set primary color (wedding pink) */
+            --bulma-primary-h: 338deg;
+            --bulma-primary-s: 57%;
+            --bulma-primary-l: 61%;
+
+            /* Set link colors to match primary */
+            --bulma-link-h: var(--bulma-primary-h);
+            --bulma-link-s: var(--bulma-primary-s);
+            --bulma-link-l: var(--bulma-primary-l);
+
+            /* Set font family */
+            --bulma-family-primary: 'Noto Serif KR', serif;
+            --bulma-family-secondary: 'Noto Serif KR', serif;
+        }
+
+        /* Dark mode overrides */
+        [data-theme="dark"] {
+            --bulma-scheme-main: hsl(0, 0%, 7%);
+            --bulma-scheme-main-bis: hsl(0, 0%, 9%);
+            --bulma-scheme-main-ter: hsl(0, 0%, 12%);
+            --bulma-scheme-invert: hsl(0, 0%, 98%);
+            --bulma-scheme-invert-bis: hsl(0, 0%, 96%);
+            --bulma-scheme-invert-ter: hsl(0, 0%, 94%);
+
+            --bulma-background: var(--bulma-scheme-main);
+            --bulma-text: hsl(0, 0%, 86%);
+            --bulma-text-strong: hsl(0, 0%, 96%);
+            --bulma-text-light: hsl(0, 0%, 60%);
+
+            /* Adjust box and modal colors for dark mode */
+            --bulma-box-background: var(--bulma-scheme-main-bis);
+            --bulma-box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.3);
+        }
+
+        /* Names styling */
+        .names-container {
+            margin-bottom: 2rem;
+        }
+
+        .bride-name,
+        .groom-name {
+            font-size: 2.2rem !important;
+            letter-spacing: 0.1em;
+        }
+
+        .flourish {
+            margin: 0.8rem 0;
+            max-width: 180px;
+            margin-left: auto;
+        }
+
+        .swash {
+            width: 100%;
+            height: auto;
+            opacity: 0.8;
+        }
+
+        /* Custom divider */
+        .custom-divider {
+            background: linear-gradient(to right,
+                    transparent,
+                    hsl(var(--bulma-primary-h) var(--bulma-primary-s) var(--bulma-primary-l)),
+                    transparent);
+            height: 1px;
+            margin: 2rem auto;
+            max-width: 150px;
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 100;
+        }
+
+        .theme-toggle .button {
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
+            padding: 0;
+        }
+
+        /* Theme icons visibility */
+        [data-theme="light"] .dark-icon,
+        [data-theme="dark"] .light-icon {
+            display: inline-block;
+        }
+
+        [data-theme="light"] .light-icon,
+        [data-theme="dark"] .dark-icon {
+            display: none;
+        }
+
+        /* Mobile optimizations */
+        @media screen and (max-width: 768px) {
+
+            .bride-name,
+            .groom-name {
+                font-size: 1.8rem !important;
+            }
+
+            .flourish {
+                max-width: 120px;
+            }
+        }
+    </style>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-analytics.js";
+        import { getFirestore, collection, addDoc, serverTimestamp }
+            from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+        // Initialize Firebase with your config
+        const firebaseConfig = {
+            apiKey: "AIzaSyD4f3YiL-hNoVtDt4bgIVmYix0Tpy1PEdQ",
+            authDomain: "kh-wedding-invite.firebaseapp.com",
+            projectId: "kh-wedding-invite",
+            storageBucket: "kh-wedding-invite.firebasestorage.app",
+            messagingSenderId: "716698901411",
+            appId: "1:716698901411:web:0e4c38cc58d871043f5816",
+            measurementId: "G-PSC7ZX6CT9"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        // Make db available globally
+        window.db = db;
+        window.serverTimestamp = serverTimestamp;
+        window.addDoc = addDoc;
+        window.collection = collection;
+    </script>
+    <script src="js/index.js"></script>
+</head>
+
+<body class="has-background-scheme-main">
+    <div class="theme-toggle">
+        <button class="button is-primary is-outlined" onclick="toggleTheme()">
+            <span class="icon">
+                <i class="fas fa-moon dark-icon"></i>
+                <i class="fas fa-sun light-icon"></i>
+            </span>
+        </button>
+    </div>
+
+    <!-- Names section - no box needed, just clean typography -->
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8-tablet is-6-desktop">
+                    <div class="names-container has-text-right">
+                        <p class="title has-text-primary bride-name">조현정</p>
+                        <div class="flourish">
+                            <img src="images/flourish.png" alt="decorative flourish" class="swash">
+                        </div>
+                        <p class="title has-text-primary groom-name">박근홍</p>
+                    </div>
+                    <p class="subtitle has-text-grey has-text-centered">
+                        2025. 02. 23. SUN PM 12:00<br />
+                        세상의 모든 아침 여의도 프로미나드
+                    </p>
+                    <div class="has-text-centered">
+                        <button class="button is-primary is-medium" onclick="openRsvpModal()">
+                            참석 여부 알리기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- After first section -->
+    <div class="custom-divider"></div>
+
+    <!-- Message section - use typography and spacing instead of box -->
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8-tablet is-6-desktop">
+                    <div class="content has-text-centered">
+                        <p class="is-size-5 has-text-grey-dark">
+                            서로가 마주보며 다져온 사랑을<br />
+                            이제 함께 한 곳을 바라보며<br />
+                            걸어갈 수 있는 큰 사랑으로 키우고자 합니다.<br />
+                            <br />
+                            저희 두 사람이 사랑의 이름으로<br />
+                            지켜나갈 수 있게 앞날을<br />
+                            축복해 주시면 감사하겠습니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- After message section -->
+    <div class="custom-divider"></div>
+
+    <!-- Parents section - use simple columns instead of tiles -->
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8-tablet is-6-desktop">
+                    <h1 class="title is-4 has-text-primary has-text-centered">혼주</h1>
+                    <div class="columns is-centered">
+                        <div class="column">
+                            <div class="content has-text-centered">
+                                <p class="subtitle has-text-primary">신랑 측 혼주</p>
+                                <p>아버지 박진수<br />어머니 서병진</p>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <div class="content has-text-centered">
+                                <p class="subtitle has-text-primary">신부 측 혼주</p>
+                                <p>아버지 조병구<br />어머니 전해실</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- After parents section -->
+    <div class="custom-divider"></div>
+
+    <!-- Location section - simple content instead of box -->
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-8-tablet is-6-desktop">
+                    <h1 class="title is-4 has-text-primary has-text-centered">오시는 길</h1>
+                    <div class="content has-text-centered">
+                        <p>
+                            <strong>세상의 모든 아침 여의도 프로미나드</strong><br />
+                            <a class="is-size-7" href="https://naver.me/G0DXoZev">서울 영등포구 여의대로 24 50층</a><br />
+                            <a class="is-size-7" href="tel:010-2464-1724">010-2464-1724</a>
+                        </p>
+                        <p class="is-size-7 has-text-grey">
+                            ※ 3시간 주차 가능
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP Modal with proper Bulma classes -->
+    <div class="modal" id="rsvp-modal">
+        <div class="modal-background" onclick="closeRsvpModal()"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title has-text-primary">참석 여부 알리기</p>
+                <button class="delete" aria-label="close" onclick="closeRsvpModal()"></button>
+            </header>
+            <section class="modal-card-body">
+                <form id="rsvp-form">
+                    <div class="field">
+                        <label class="label">성함*</label>
+                        <div class="control">
+                            <input class="input" type="text" name="name" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">참석 인원*</label>
+                        <div class="control">
+                            <input class="input" type="number" name="guests" min="1" max="10" required>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">연락처</label>
+                        <div class="control">
+                            <input class="input" type="tel" name="contact" pattern="[0-9-]{11,13}">
+                        </div>
+                        <p class="help">예: 010-1234-5678</p>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">관계*</label>
+                        <div class="control">
+                            <div class="select is-fullwidth">
+                                <select name="relation" required>
+                                    <option value="">선택해주세요</option>
+                                    <option value="bride">신부 측</option>
+                                    <option value="groom">신랑 측</option>
+                                    <option value="both">양가 모두</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="control">
+                            <button type="submit" class="button is-primary is-fullwidth">
+                                제출하기
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+
+    <script src="js/rsvp.js"></script>
+</body>
+
+</html>
